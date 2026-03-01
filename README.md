@@ -1,16 +1,21 @@
-# React + Vite
+# 🛰️ Sentinel OS (Latitude.sh Edition)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance validator monitoring suite and self-healing infrastructure layer, purpose-built for **Latitude.sh Bare Metal**.
 
-Currently, two official plugins are available:
+## 🏗️ Project Architecture
+* **/src & server.js**: React + Node.js dashboard providing real-time Reth/Solana telemetry.
+* **/terraform**: Automated provisioning for global multi-region validator deployment.
+* **/scripts**: Python-based "Self-Healing" bot that monitors node health and interacts with Latitude API v2.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Phase 2 Features (Active)
+- **Infrastructure-as-Code**: Deploy new validator nodes in any Latitude site (AMS1, TYO1, NYC1) via Terraform.
+- **AI-Ready Monitoring**: Integrated with **Latitude.sh MCP Server** for automated hardware audits.
+- **Self-Healing**: Automated reboot/re-provisioning logic triggered by on-chain sync lag.
 
-## React Compiler
+## 🛠️ Usage
+1. `npm install` && `npm run dev` to start the dashboard.
+2. `cd terraform && terraform init` to scale the infrastructure.
+3. `python3 scripts/sentinel-bot.py` to enable autonomous health management.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+*Developed for the Latitude.sh 2026 Developer Grant.*
