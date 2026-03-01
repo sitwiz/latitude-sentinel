@@ -1,32 +1,30 @@
-import express from 'express';
-import cors from 'cors';
-import axios from 'axios';
-import 'dotenv/config';
-
+const express = require('express');
+const { exec } = require('child_process');
+const os = require('os');
 const app = express();
-app.use(cors());
+const port = 3001; // API Port
 
-const PORT = process.env.PORT || 5000;
-const LATITUDE_API = "https://api.latitude.sh";
+app.get('/api/stats', (req, res) => {
+    // This command checks PM2 to see if our specific nodes are online
+    exec('pm2 jlist', (err, stdout) => {
+        const processes = JSON.parse(stdout);
+        
+        const getStatus = (name) => {
+            const proc = processes.find(p => p.name === name);
+            return proc ? proc.pm2_env.status : 'offline';
+        };
 
-// This is a test route to see if the server is alive
-app.get('/', (req, res) => {
-  res.send("Sentinel Backend is Online!");
-});
-
-// The actual data route
-app.get('/api/stats', async (req, res) => {
-  try {
-    const response = await axios.get(`${LATITUDE_API}/servers`, {
-      headers: { 'Authorization': `Bearer ${process.env.LATITUDE_API_KEY}` }
+        res.json({
+            cpu: (os.loadavg()[0] * 100 / os.cpus().length).toFixed(2),
+            ram: ((1 - os.freemem() / os.totalmem()) * 100).toFixed(2),
+            nodes: {
+                execution: { name: 'Reth', status: getStatus('eth-execution') },
+                consensus: { name: 'Lighthouse', status: getStatus('eth-consensus') }
+            }
+        });
     });
-    res.json(response.data);
-  } catch (error) {
-    console.error("API Error:", error.response ? error.response.data : error.message);
-    res.status(500).json({ error: "Failed to fetch Latitude stats. Check your API Key." });
-  }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Backend running on http://0.0.0.0:${PORT}`);
+app.listen(port, () => {
+    console.log(`Sentinel API listening at http://localhost:${port}`);
 });
