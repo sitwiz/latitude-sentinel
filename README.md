@@ -1,6 +1,13 @@
+
+
 # 🛰️ Sentinel OS (Latitude.sh Edition)
 
 A high-performance validator monitoring suite and self-healing infrastructure layer, purpose-built for **Latitude.sh Bare Metal**.
+
+[![Deploy to Latitude.sh](https://img.shields.io/badge/Deploy%20to-Latitude.sh-blue?style=for-the-badge&logo=target)](https://dashboard.latitude.sh/blueprints/deploy?repository=https://github.com/sitwiz/latitude-sentinel)
+
+## ⚡ One-Click Deployment
+Sentinel OS is designed for zero-friction infrastructure. Click the button above to launch a fully-configured monitoring node on Latitude.sh bare metal in under 60 seconds.
 
 ## 🏗️ Project Architecture
 * **/src & server.js**: React + Node.js dashboard providing real-time Reth/Solana telemetry.

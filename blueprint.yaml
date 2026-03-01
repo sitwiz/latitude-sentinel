@@ -1,0 +1,16 @@
+name: "Sentinel OS One-Click Validator"
+description: "Deploy a high-performance, self-healing Sentinel OS node in 60 seconds."
+plan: m4-metal-small
+region: ams1
+operating_system: ubuntu_22_04_x64_lts
+user_data: |
+  #!/bin/bash
+  # Automatic Sentinel OS Installer
+  apt-get update
+  apt-get install -y nodejs npm git
+  git clone https://github.com/sitwiz/latitude-sentinel.git /opt/sentinel
+  cd /opt/sentinel && npm install
+  npm install -g pm2
+  pm2 start server.js --name "sentinel-api"
+  pm2 save
+  pm2 startup
