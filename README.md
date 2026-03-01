@@ -22,5 +22,6 @@ Sentinel OS is designed for zero-friction infrastructure. Click the button above
 2. `cd terraform && terraform init` to scale the infrastructure.
 3. `python3 scripts/sentinel-bot.py` to enable autonomous health management.
 
----
+curl -sSL https://raw.githubusercontent.com/sitwiz/latitude-sentinel/main/install.sh | bash
+
 *Developed for the Latitude.sh 2026 Developer Grant.*
